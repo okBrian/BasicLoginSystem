@@ -2,12 +2,7 @@
 
 bool operator==(const User& user1, const User& user2)
 {
-	return (user1.Username == user2.Username);
-}
-
-LoginSystem::LoginSystem()
-	: numUser(0)
-{
+	return ((user1.Username == user2.Username) && (user1.Password == user2.Password));
 }
 
 const bool LoginSystem::loginUser(const User& userInput) 
