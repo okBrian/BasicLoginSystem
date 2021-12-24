@@ -38,3 +38,10 @@ const std::string LoginSystem::getAllUser()
 	return outString;
 }
 
+void LoginSystem::makeUserFile(unsigned int ID)
+{
+	fs.open(IdUser.find(ID)->second.Username, std::ios_base::out);
+	std::string text = "ID -> " + std::to_string(ID) + "\nUsername -> " + IdUser.find(ID)->second.Username + "\nPassword -> " + IdUser.find(ID)->second.Password;
+	fs.write(text.c_str(), text.length() * sizeof(char));
+	fs.close();
+}

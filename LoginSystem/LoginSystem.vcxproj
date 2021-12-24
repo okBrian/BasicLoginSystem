@@ -161,6 +161,10 @@
   <ItemGroup>
     <ClInclude Include="src\LoginSystem.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Goy" />
+    <None Include="Wamen" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
