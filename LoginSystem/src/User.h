@@ -7,8 +7,10 @@ class User
 	public:
 		std::string Username;
 		bool signedIn;
-		User(std::string Username, std::string Password);
+		User(std::string Username, std::string Password, bool signedIn);
 		float getTimeSignedIn();
+		void logInUser();
+		void logOutUser();
 		const std::string getPassword() const;
 	private:
 		std::string Password;
@@ -19,6 +21,4 @@ class User
 		
 		void timeStart();
 		void timeEnd();
-		
-
 };

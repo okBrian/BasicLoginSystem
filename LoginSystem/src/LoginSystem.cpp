@@ -5,25 +5,38 @@ bool operator==(const User& user1, const User& user2)
 	return ((user1.Username == user2.Username) && (user1.getPassword() == user2.getPassword()));
 }
 
-bool LoginSystem::loginUser(const User& userInput)
+bool LoginSystem::loginUser(const std::string& Username, const std::string& Password)
 {
 	for (std::map<unsigned int, User>::iterator it = IdUser.begin(); it != IdUser.end(); it++)
 	{
-		if (userInput == it->second)
+		if ((it->second.Username == Username) && (it->second.getPassword() == Password))
+		{
+			it->second.logInUser();
 			return true;
+		}
 	}
 	return false;
 }
 
-void LoginSystem::addUser(unsigned int ID, User userInfo)
+void LoginSystem::signOut(unsigned int ID)
 {
-	if ((IdUser.find(ID) != IdUser.end()) && (IdUser.find(ID)->second == userInfo))
-		std::cout << "ID or userInfo Value already taken" << std::endl;
-	else
-		IdUser.insert(std::pair<unsigned int, User>(ID, userInfo));
+	IdUser.find(ID)->second.logOutUser();
 }
 
-const User LoginSystem::getUser(unsigned int& ID) const
+float LoginSystem::getTimeOfUser(unsigned int ID)
+{
+	return IdUser.find(ID)->second.getTimeSignedIn();
+}
+
+void LoginSystem::addUser(unsigned int ID, User userInput)
+{
+	if ((IdUser.find(ID) != IdUser.end()) && (IdUser.find(ID)->second == userInput))
+		std::cout << "ID or userInfo Value already taken" << std::endl;
+	else
+		IdUser.insert(std::pair<unsigned int, User>(ID, userInput));
+}
+
+const User LoginSystem::getUser(unsigned int ID) const
 {
 	return IdUser.find(ID)->second;
 }

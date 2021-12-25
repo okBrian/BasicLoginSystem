@@ -1,7 +1,7 @@
 #include "User.h"
 
-User::User(std::string Username, std::string Password)
-	: Username(Username), Password(Password)
+User::User(std::string Username, std::string Password, bool signedIn)
+	: Username(Username), Password(Password), signedIn(signedIn)
 {
 }
 
@@ -14,6 +14,20 @@ float User::getTimeSignedIn()
 const std::string User::getPassword() const
 {
 	return Password;
+}
+
+void User::logInUser()
+{
+	std::cout << "User Logged in!" << std::endl;
+	signedIn = true;
+	timeStart();
+}
+
+void User::logOutUser()
+{
+	std::cout << "User Logged out" << std::endl;
+	signedIn = false;
+	timeEnd();
 }
 
 void User::timeStart()
