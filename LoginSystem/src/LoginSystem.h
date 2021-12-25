@@ -12,7 +12,7 @@ class LoginSystem
 		bool loginUser(const std::string& Username, const std::string& Password);
 		void signOut(unsigned int ID);
 		float getTimeOfUser(unsigned int ID);
-		void addUser(unsigned int ID, User userInput);
+		void addUser(unsigned int ID, User userInput, std::string Description);
 		const User getUser(unsigned int ID) const;
 		const std::string getAllUser();
 		void makeUserFile(unsigned int ID);

@@ -28,12 +28,15 @@ float LoginSystem::getTimeOfUser(unsigned int ID)
 	return IdUser.find(ID)->second.getTimeSignedIn();
 }
 
-void LoginSystem::addUser(unsigned int ID, User userInput)
+void LoginSystem::addUser(unsigned int ID, User userInput, std::string Description)
 {
 	if ((IdUser.find(ID) != IdUser.end()) && (IdUser.find(ID)->second == userInput))
 		std::cout << "ID or userInfo Value already taken" << std::endl;
 	else
+	{
 		IdUser.insert(std::pair<unsigned int, User>(ID, userInput));
+		IdUser.find(ID)->second.setDescription(Description);
+	}
 }
 
 const User LoginSystem::getUser(unsigned int ID) const
@@ -54,7 +57,7 @@ const std::string LoginSystem::getAllUser()
 void LoginSystem::makeUserFile(unsigned int ID)
 {
 	fs.open(IdUser.find(ID)->second.Username, std::ios_base::out);
-	std::string text = "ID -> " + std::to_string(ID) + "\nUsername -> " + IdUser.find(ID)->second.Username + "\nPassword -> " + IdUser.find(ID)->second.getPassword();
+	std::string text = "ID -> " + std::to_string(ID) + "\nUsername -> " + IdUser.find(ID)->second.Username + "\nPassword -> " + IdUser.find(ID)->second.getPassword() + "\nDescription:\n\n" + IdUser.find(ID)->second.getDescription();
 	fs.write(text.c_str(), text.length() * sizeof(char));
 	fs.close();
 }

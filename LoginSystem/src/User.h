@@ -12,13 +12,13 @@ class User
 		void logInUser();
 		void logOutUser();
 		const std::string getPassword() const;
+		void setDescription(std::string& Description);
+		const std::string getDescription() const;
 	private:
 		std::string Password;
 		std::string Description;
 		std::chrono::high_resolution_clock clock;
 		std::chrono::high_resolution_clock::time_point startTime;
 		std::chrono::high_resolution_clock::time_point endTime;
-		
-		void timeStart();
-		void timeEnd();
+
 };

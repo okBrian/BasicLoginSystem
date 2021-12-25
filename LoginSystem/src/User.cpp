@@ -21,22 +21,22 @@ void User::logInUser()
 {
 	std::cout << "User Logged in!" << std::endl;
 	signedIn = true;
-	timeStart();
+	startTime = std::chrono::high_resolution_clock::now();
 }
 
 void User::logOutUser()
 {
 	std::cout << "User Logged out" << std::endl;
 	signedIn = false;
-	timeEnd();
-}
-
-void User::timeStart()
-{
-	startTime = std::chrono::high_resolution_clock::now();
-}
-
-void User::timeEnd()
-{
 	endTime = std::chrono::high_resolution_clock::now();
+}
+
+void User::setDescription(std::string& Description)
+{
+	User::Description = Description;
+}
+
+const std::string User::getDescription() const
+{
+	return Description;
 }
