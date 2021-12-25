@@ -17,7 +17,7 @@ int main()
 	std::cout << ls.getAllUser() << std::endl;
 	ls.loginUser("Wamen", "Password");
 	std::this_thread::sleep_for(1s);
-	std::cout << ls.getTimeOfUser(1) << std::endl;
+	std::cout << ls.getTimeOfUser(1) << " seconds" << std::endl;
 	ls.signOut(1);
 	ls.getTimeOfUser(1);
 

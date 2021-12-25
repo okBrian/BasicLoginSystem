@@ -7,6 +7,7 @@ User::User(std::string Username, std::string Password, bool signedIn)
 
 float User::getTimeSignedIn()
 {
+	endTime = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float> duration = endTime - startTime;
 	return duration.count();
 }
