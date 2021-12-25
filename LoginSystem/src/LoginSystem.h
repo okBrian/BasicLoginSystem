@@ -1,21 +1,18 @@
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <map>
+#include <fstream>
 
-struct User
-{
-	std::string Username;
-	std::string Password;
-};
+#include "User.h"
 
-class LoginSystem
+class LoginSystem : User
 {
+	protected:
+		std::map<unsigned int, User> IdUser;
 	private:
 		std::fstream fs;
-		std::map<unsigned int, User> IdUser;
 	public:
-		const bool loginUser(const User& userInput);
+
+		bool loginUser(const User& userInput);
+		bool signInUser();
 		void addUser(unsigned int ID, User userInfo);
 		const User getUser(unsigned int& ID) const;
 		const std::string getAllUser();

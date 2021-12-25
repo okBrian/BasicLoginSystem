@@ -2,10 +2,10 @@
 
 bool operator==(const User& user1, const User& user2)
 {
-	return ((user1.Username == user2.Username) && (user1.Password == user2.Password));
+	return ((user1.Username == user2.Username) && (user1.getPassword() == user2.getPassword()));
 }
 
-const bool LoginSystem::loginUser(const User& userInput) 
+bool LoginSystem::loginUser(const User& userInput)
 {
 	for (std::map<unsigned int, User>::iterator it = IdUser.begin(); it != IdUser.end(); it++)
 	{
@@ -33,7 +33,7 @@ const std::string LoginSystem::getAllUser()
 	std::string outString;
 	for (std::map<unsigned int, User>::iterator it = IdUser.begin(); it != IdUser.end(); it++)
 	{
-		outString.append(std::to_string(it->first) + std::string(" => ") + it->second.Username + " | " + it->second.Password + "\n");
+		outString.append(std::to_string(it->first) + std::string(" => ") + it->second.Username + " | " + it->second.getPassword() + "\n");
 	}
 	return outString;
 }
@@ -41,7 +41,7 @@ const std::string LoginSystem::getAllUser()
 void LoginSystem::makeUserFile(unsigned int ID)
 {
 	fs.open(IdUser.find(ID)->second.Username, std::ios_base::out);
-	std::string text = "ID -> " + std::to_string(ID) + "\nUsername -> " + IdUser.find(ID)->second.Username + "\nPassword -> " + IdUser.find(ID)->second.Password;
+	std::string text = "ID -> " + std::to_string(ID) + "\nUsername -> " + IdUser.find(ID)->second.Username + "\nPassword -> " + IdUser.find(ID)->second.getPassword();
 	fs.write(text.c_str(), text.length() * sizeof(char));
 	fs.close();
 }

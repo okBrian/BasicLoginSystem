@@ -157,9 +157,11 @@
   <ItemGroup>
     <ClCompile Include="src\LoginSystem.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\LoginSystem.h" />
+    <ClInclude Include="src\User.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Goy" />
