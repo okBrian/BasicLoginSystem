@@ -26,15 +26,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\LoginSystem.h">
+    <ClInclude Include="src\LoginSystem.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\User.h">
+    <ClInclude Include="src\User.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Wamen" />
     <None Include="Goy" />
+    <None Include=".clang-tidy" />
   </ItemGroup>
 </Project>

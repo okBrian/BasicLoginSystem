@@ -1,42 +1,27 @@
-#include "User.h"
+#include "User.hpp"
 
-User::User(std::string Username, std::string Password, bool signedIn)
+User::User(const char* Username, const char* Password, bool signedIn)
 	: Username(Username), Password(Password), signedIn(signedIn)
 {
 }
 
-float User::getTimeSignedIn()
+void User::LogIn()
 {
-	endTime = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<float> duration = endTime - startTime;
-	return duration.count();
-}
-
-const std::string User::getPassword() const
-{
-	return Password;
-}
-
-void User::logInUser()
-{
-	std::cout << "User Logged in!" << std::endl;
+	fmt::print("User Logged In\n");
 	signedIn = true;
 	startTime = std::chrono::high_resolution_clock::now();
 }
 
-void User::logOutUser()
+void User::LogOut()
 {
-	std::cout << "User Logged out" << std::endl;
+	fmt::print("User Logged Out\n");
 	signedIn = false;
 	endTime = std::chrono::high_resolution_clock::now();
 }
 
-void User::setDescription(std::string& Description)
+auto User::getTimeSignedIn() -> float
 {
-	User::Description = Description;
-}
-
-const std::string User::getDescription() const
-{
-	return Description;
+	endTime = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<float> duration = endTime - startTime;
+	return duration.count();
 }

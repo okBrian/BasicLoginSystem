@@ -1,5 +1,5 @@
 #include <thread>
-#include "LoginSystem.h"
+#include "LoginSystem.hpp"
 
 std::ostream& operator<<(std::ostream& os, const User& user)
 {
@@ -7,18 +7,18 @@ std::ostream& operator<<(std::ostream& os, const User& user)
 	return os;
 }
 
-int main()
+int main(int ,char**)
 {
 	LoginSystem ls;
-	ls.addUser(1, User( "Wamen", "Password", false ), "My name is Wamen");
+	ls.addUser(1, User("Wamen", "Password", false), "My name is Wamen");
 	ls.addUser(5, User( "Goy", "Password", false), "My name is Goy");
 	std::cout << ls.getAllUser() << std::endl;
 
 
-	ls.loginUser("Wamen", "Password");
+	ls.LoginUser("Wamen", "Password");
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	std::cout << ls.getTimeOfUser(1) << " seconds" << std::endl;
-	ls.signOut(1);
+	ls.SignOutUser(1);
 
 
 	ls.getTimeOfUser(1);

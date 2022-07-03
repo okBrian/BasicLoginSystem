@@ -1,26 +1,18 @@
-#include "LoginSystem.h"
+#include "LoginSystem.hpp"
 
-bool operator==(const User& user1, const User& user2)
+bool LoginSystem::LoginUser(const char* Username, const char* Password)
 {
-	return ((user1.Username == user2.Username) && (user1.getPassword() == user2.getPassword()));
-}
-
-bool LoginSystem::loginUser(const std::string& Username, const std::string& Password)
-{
-	for (std::map<unsigned int, User>::iterator it = IdUser.begin(); it != IdUser.end(); it++)
+	auto checkEqual = [&Username, &Password](const auto& IdPair)
 	{
-		if ((it->second.Username == Username) && (it->second.getPassword() == Password))
-		{
-			it->second.logInUser();
-			return true;
-		}
-	}
-	return false;
+		const auto& [ID, user] = IdPair;
+		return ((user.Username == Username) && (user.getPassword() == Password));
+	};
+	return std::find_if(begin(IdUser), end(IdUser), checkEqual) != std::end(IdUser);
 }
 
-void LoginSystem::signOut(unsigned int ID)
+void LoginSystem::SignOutUser(unsigned int ID)
 {
-	IdUser.find(ID)->second.logOutUser();
+	IdUser.find(ID)->second.LogOut();
 }
 
 float LoginSystem::getTimeOfUser(unsigned int ID)
@@ -28,28 +20,23 @@ float LoginSystem::getTimeOfUser(unsigned int ID)
 	return IdUser.find(ID)->second.getTimeSignedIn();
 }
 
-void LoginSystem::addUser(unsigned int ID, User userInput, std::string Description)
+void LoginSystem::addUser(unsigned int ID, User userInput, const char* Description)
 {
-	if ((IdUser.find(ID) != IdUser.end()) && (IdUser.find(ID)->second == userInput))
-		std::cout << "ID or userInfo Value already taken" << std::endl;
+	if (IdUser.find(ID) != IdUser.end())
+		fmt::print("ID already taken\n");
 	else
 	{
-		IdUser.insert(std::pair<unsigned int, User>(ID, userInput));
+		IdUser.try_emplace(ID, userInput);
 		IdUser.find(ID)->second.setDescription(Description);
 	}
 }
 
-const User LoginSystem::getUser(unsigned int ID) const
+std::string LoginSystem::getAllUser() const
 {
-	return IdUser.find(ID)->second;
-}
-
-const std::string LoginSystem::getAllUser() 
-{
-	std::string outString;
-	for (std::map<unsigned int, User>::iterator it = IdUser.begin(); it != IdUser.end(); it++)
+	std::string outString{};
+	for (const auto& [ID, user] : IdUser)
 	{
-		outString.append(std::to_string(it->first) + std::string(" => ") + it->second.Username + " | " + it->second.getPassword() + "\n");
+		outString.append(fmt::format("{0} => {1} - {2}\n", ID, user.Username, user.getPassword()));
 	}
 	return outString;
 }
@@ -57,7 +44,12 @@ const std::string LoginSystem::getAllUser()
 void LoginSystem::makeUserFile(unsigned int ID)
 {
 	fs.open(IdUser.find(ID)->second.Username, std::ios_base::out);
-	std::string text = "ID -> " + std::to_string(ID) + "\nUsername -> " + IdUser.find(ID)->second.Username + "\nPassword -> " + IdUser.find(ID)->second.getPassword() + "\nDescription:\n\n" + IdUser.find(ID)->second.getDescription();
+	std::string text = fmt::format(
+		"ID-> {0}\nUsername -> {1}\nPassword -> {2}\n\nDescription -> {3}", 
+		ID, 
+		IdUser.find(ID)->second.Username, 
+		IdUser.find(ID)->second.getPassword(), 
+		IdUser.find(ID)->second.Description);
 	fs.write(text.c_str(), text.length() * sizeof(char));
 	fs.close();
 }

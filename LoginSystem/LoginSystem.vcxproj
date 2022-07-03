@@ -160,10 +160,11 @@
     <ClCompile Include="src\User.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\LoginSystem.h" />
-    <ClInclude Include="src\User.h" />
+    <ClInclude Include="src\LoginSystem.hpp" />
+    <ClInclude Include="src\User.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".clang-tidy" />
     <None Include="Goy" />
     <None Include="Wamen" />
   </ItemGroup>
