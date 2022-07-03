@@ -12,12 +12,12 @@ int main(int ,char**)
 	LoginSystem ls;
 	ls.addUser(1, User("Wamen", "Password", false), "My name is Wamen");
 	ls.addUser(5, User( "Goy", "Password", false), "My name is Goy");
-	std::cout << ls.getAllUser() << std::endl;
+	fmt::print("{}\n", ls.getAllUser());
 
 
 	ls.LoginUser("Wamen", "Password");
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::cout << ls.getTimeOfUser(1) << " seconds" << std::endl;
+	fmt::print("{} seconds\n", ls.getTimeOfUser(1));
 	ls.SignOutUser(1);
 
 
