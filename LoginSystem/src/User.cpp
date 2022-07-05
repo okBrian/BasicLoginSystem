@@ -1,6 +1,6 @@
 #include "User.hpp"
 
-User::User(const char* Username, const char* Password, bool signedIn)
+User::User(const std::string& Username, const std::string& Password, bool signedIn)
 	: Username(Username), Password(Password), signedIn(signedIn)
 {
 }
@@ -19,7 +19,7 @@ void User::LogOut()
 	endTime = std::chrono::high_resolution_clock::now();
 }
 
-auto User::getTimeSignedIn() -> float
+float User::getTimeSignedIn() 
 {
 	endTime = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float> duration = endTime - startTime;
