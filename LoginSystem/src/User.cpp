@@ -1,6 +1,6 @@
 #include "User.hpp"
 
-User::User(const std::string& Username, const std::string& Password, bool signedIn)
+User::User(const std::string_view& Username, const std::string_view& Password, bool signedIn)
 	: Username(Username), Password(Password), signedIn(signedIn)
 {
 }

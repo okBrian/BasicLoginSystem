@@ -11,11 +11,11 @@ private:
 	std::map<unsigned int, User> IdUser{};
 	std::fstream fs{};
 public:
-	bool LoginUser(const char* Username, const char* Password);
+	bool LoginUser(const std::string_view&, const std::string_view& Password);
 	void SignOutUser(unsigned int ID);
 
 	float getTimeOfUser(unsigned int ID);
-	void addUser(unsigned int ID, User userInput, const char* Description);
+	void addUser(unsigned int ID, User userInput, const std::string_view& Description);
 	std::string getAllUser() const;
 	void makeUserFile(unsigned int ID);
 

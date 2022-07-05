@@ -1,6 +1,6 @@
 #include "LoginSystem.hpp"
 
-bool LoginSystem::LoginUser(const char* Username, const char* Password)
+bool LoginSystem::LoginUser(const std::string_view& Username, const std::string_view& Password)
 {
 	auto checkEqual = [&Username, &Password](const auto& IdPair)
 	{
@@ -20,7 +20,7 @@ float LoginSystem::getTimeOfUser(unsigned int ID)
 	return IdUser.find(ID)->second.getTimeSignedIn();
 }
 
-void LoginSystem::addUser(unsigned int ID, User userInput, const char* Description)
+void LoginSystem::addUser(unsigned int ID, User userInput, const std::string_view& Description)
 {
 	if (IdUser.find(ID) != IdUser.end())
 		fmt::print("ID already taken\n");

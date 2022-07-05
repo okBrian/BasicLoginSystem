@@ -1,8 +1,7 @@
 #pragma once
+#include <fmt/core.h>
 #include <string>
 #include <chrono>
-#include <memory>
-#include <fmt/core.h>
 
 class User
 {
@@ -16,13 +15,13 @@ private:
 	std::chrono::high_resolution_clock::time_point startTime{};
 	std::chrono::high_resolution_clock::time_point endTime{};
 public:
-	User(const std::string& Username, const std::string& Password, bool signedIn = false);
+	User(const std::string_view& Username, const std::string_view& Password, bool signedIn = false);
 
 
 	void LogIn();
 	void LogOut();
 
-	void setDescription(const char* New_Description) { User::Description = New_Description; };
+	void setDescription(const std::string_view& New_Description) { User::Description = New_Description; };
 	float getTimeSignedIn();
 
 	inline std::string getPassword() const { return Password; };
